@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
 
         observerListUser()
-        getUser()
     }
 
     private fun setupRecyclerView() {
@@ -57,9 +56,5 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-    }
-
-    private fun getUser() {
-        viewModel.getListUser()
     }
 }
