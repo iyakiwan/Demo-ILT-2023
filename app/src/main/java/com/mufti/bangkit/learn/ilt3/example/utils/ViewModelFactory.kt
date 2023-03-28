@@ -1,5 +1,6 @@
 package com.mufti.bangkit.learn.ilt3.example.utils
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.mufti.bangkit.learn.ilt3.example.data.UserRepository
@@ -19,9 +20,9 @@ class ViewModelFactory private constructor(private val repository: UserRepositor
     companion object {
         @Volatile
         private var instance: ViewModelFactory? = null
-        fun getInstance(): ViewModelFactory =
+        fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
-                instance ?: ViewModelFactory(Injection.provideRepository())
+                instance ?: ViewModelFactory(Injection.provideRepository(context))
             }.also { instance = it }
     }
 }
