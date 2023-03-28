@@ -1,4 +1,4 @@
-package com.mufti.bangkit.learn.ilt3.example.data.retrofit
+package com.mufti.bangkit.learn.ilt3.example.data.remote.retrofit
 
 import com.mufti.bangkit.learn.ilt3.example.BuildConfig
 import okhttp3.OkHttpClient

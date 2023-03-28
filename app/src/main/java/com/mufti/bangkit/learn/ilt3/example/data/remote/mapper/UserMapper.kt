@@ -1,6 +1,6 @@
-package com.mufti.bangkit.learn.ilt3.example.data.mapper
+package com.mufti.bangkit.learn.ilt3.example.data.remote.mapper
 
-import com.mufti.bangkit.learn.ilt3.example.data.response.UserResponse
+import com.mufti.bangkit.learn.ilt3.example.data.remote.response.UserResponse
 import com.mufti.bangkit.learn.ilt3.example.model.User
 
 object UserMapper {

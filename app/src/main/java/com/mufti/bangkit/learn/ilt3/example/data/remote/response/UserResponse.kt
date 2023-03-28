@@ -1,4 +1,4 @@
-package com.mufti.bangkit.learn.ilt3.example.data.response
+package com.mufti.bangkit.learn.ilt3.example.data.remote.response
 
 import com.google.gson.annotations.SerializedName
 

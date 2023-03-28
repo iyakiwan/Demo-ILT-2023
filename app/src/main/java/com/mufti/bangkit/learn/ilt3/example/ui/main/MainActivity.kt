@@ -8,6 +8,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mufti.bangkit.learn.ilt3.example.databinding.ActivityMainBinding
+import com.mufti.bangkit.learn.ilt3.example.utils.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -19,9 +20,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val factory: ViewModelFactory = ViewModelFactory.getInstance()
+
         viewModel = ViewModelProvider(
             this,
-            ViewModelProvider.NewInstanceFactory()
+            factory
         )[MainViewModel::class.java]
 
         setupRecyclerView()
