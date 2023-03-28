@@ -1,4 +1,4 @@
-package com.mufti.bangkit.learn.ilt3.example
+package com.mufti.bangkit.learn.ilt3.example.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.RequestOptions
+import com.mufti.bangkit.learn.ilt3.example.R
 import com.mufti.bangkit.learn.ilt3.example.databinding.ItemListUserBinding
 import com.mufti.bangkit.learn.ilt3.example.model.User
 
