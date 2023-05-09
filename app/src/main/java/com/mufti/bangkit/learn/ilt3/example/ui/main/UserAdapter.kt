@@ -46,7 +46,7 @@ class UserAdapter:
     }
 
     companion object {
-        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
             override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
                 return oldItem == newItem
             }
