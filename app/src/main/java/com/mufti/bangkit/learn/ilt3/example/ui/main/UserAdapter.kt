@@ -2,6 +2,7 @@ package com.mufti.bangkit.learn.ilt3.example.ui.main
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,8 +12,8 @@ import com.mufti.bangkit.learn.ilt3.example.R
 import com.mufti.bangkit.learn.ilt3.example.databinding.ItemListUserBinding
 import com.mufti.bangkit.learn.ilt3.example.model.User
 
-class UserAdapter(private var users: List<User>) :
-    RecyclerView.Adapter<UserAdapter.ListViewHolder>() {
+class UserAdapter:
+    PagingDataAdapter<User, UserAdapter.ListViewHolder>(DIFF_CALLBACK) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         val binding =
@@ -20,11 +21,11 @@ class UserAdapter(private var users: List<User>) :
         return ListViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = users.size
-
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
-        val user = users[position]
-        holder.bind(user)
+        val data = getItem(position)
+        if (data != null) {
+            holder.bind(data)
+        }
     }
 
     class ListViewHolder(private var binding: ItemListUserBinding) :
@@ -44,25 +45,15 @@ class UserAdapter(private var users: List<User>) :
         }
     }
 
-    fun refreshData(users: List<User>) {
-        val diffResult = DiffUtil.calculateDiff(diffCallback(this.users, users))
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<User>() {
+            override fun areItemsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem == newItem
+            }
 
-        this.users = users
-        diffResult.dispatchUpdatesTo(this)
-    }
-
-    private fun diffCallback(
-        oldList: List<User>,
-        newList: List<User>
-    ) = object : DiffUtil.Callback() {
-        override fun getOldListSize(): Int = oldList.size
-
-        override fun getNewListSize(): Int = newList.size
-
-        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldList[oldItemPosition].id == newList[newItemPosition].id
-
-        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
-            oldList[oldItemPosition] === newList[newItemPosition]
+            override fun areContentsTheSame(oldItem: User, newItem: User): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
     }
 }

@@ -3,31 +3,30 @@ package com.mufti.bangkit.learn.ilt3.example.data
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
 import com.mufti.bangkit.learn.ilt3.example.data.local.room.UserDao
 import com.mufti.bangkit.learn.ilt3.example.data.remote.retrofit.ApiService
 import com.mufti.bangkit.learn.ilt3.example.model.User
 import com.mufti.bangkit.learn.ilt3.example.data.remote.mapper.UserMapper
+import com.mufti.bangkit.learn.ilt3.example.data.remote.paging.UserPagingSource
 
 class UserRepository private constructor(
     private val apiService: ApiService,
     private val userDao: UserDao
 ) {
 
-    fun getListUser(): LiveData<Result<List<User>>> = liveData {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getListUsers("1")
-            val dataResult = UserMapper.mapListUserResponseToListUserEntity(response)
-
-            userDao.deleteAllUser()
-
-            userDao.insertUser(dataResult)
-
-            emit(Result.Success(UserMapper.mapListUserEntityToListUser(userDao.getAllUser())))
-        } catch (e: Exception) {
-            Log.d("UserRepository", "getListUser: ${e.message.toString()} ")
-            emit(Result.Error(e.message.toString()))
-        }
+    fun getListUser(): LiveData<PagingData<User>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 6
+            ),
+            pagingSourceFactory = {
+                UserPagingSource(apiService)
+            }
+        ).liveData
     }
 
     companion object {

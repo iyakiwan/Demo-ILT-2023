@@ -5,5 +5,5 @@ import retrofit2.http.*
 
 interface ApiService {
     @GET("api/users")
-    suspend fun getListUsers(@Query("page") page: String): UserResponse
+    suspend fun getListUsers(@Query("page") page: Int): UserResponse
 }

@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupRecyclerView() {
-        adapter = UserAdapter(mutableListOf())
+        adapter = UserAdapter()
 
         binding.rvUsers.setHasFixedSize(true)
         binding.rvUsers.layoutManager = LinearLayoutManager(this)
@@ -51,7 +51,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun observerListUser() {
         viewModel.listUser.observe(this){
-            when(it){
+            adapter.submitData(lifecycle, it)
+            /*when(it){
                 is Result.Loading -> {
                     binding.pvUsers.isVisible = true
                 }
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
                     binding.pvUsers.isVisible = false
                     Toast.makeText(this@MainActivity, it.error, Toast.LENGTH_SHORT).show()
                 }
-            }
+            }*/
         }
     }
 }
