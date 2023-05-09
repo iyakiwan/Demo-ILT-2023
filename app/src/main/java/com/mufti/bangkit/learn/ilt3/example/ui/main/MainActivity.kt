@@ -1,5 +1,6 @@
 package com.mufti.bangkit.learn.ilt3.example.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -8,6 +9,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mufti.bangkit.learn.ilt3.example.databinding.ActivityMainBinding
+import com.mufti.bangkit.learn.ilt3.example.ui.MapsActivity
 import com.mufti.bangkit.learn.ilt3.example.utils.ViewModelFactory
 
 class MainActivity : AppCompatActivity() {
@@ -27,9 +29,16 @@ class MainActivity : AppCompatActivity() {
             factory
         )[MainViewModel::class.java]
 
+        initialView()
         setupRecyclerView()
 
         observerListUser()
+    }
+
+    private fun initialView() {
+        binding.fabMaps.setOnClickListener {
+            startActivity(Intent(this, MapsActivity::class.java))
+        }
     }
 
     private fun setupRecyclerView() {
